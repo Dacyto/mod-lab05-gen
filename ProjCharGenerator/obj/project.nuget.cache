@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1j74KFSJUokoZJVthjpKrqsCjdGWkVultjSwM3kzm0GD5h0/Whf3RrbX6FDRlRv3a9PSSsyQdV3yY4lpoPJmGQ==",
+  "dgSpecHash": "e1iDgzVKH5xo5cWF7oJsQb399Moh5Xbo87ZbX9+8sl3p5wAEln0QXYUeSqbVfw6P/ysWtV1S4LnpYtzKQOCQWQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Владимир\\Source\\Repos\\mod-lab05-gen\\ProjCharGenerator\\ProjCharGenerator.csproj",
+  "projectFilePath": "C:\\Users\\Владимир\\source\\repos\\mod-lab05-gen\\ProjCharGenerator\\ProjCharGenerator.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Владимир\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.0.3\\microsoft.netcore.app.host.win-x64.3.0.3.nupkg.sha512",
     "C:\\Users\\Владимир\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.0.1\\microsoft.aspnetcore.app.ref.3.0.1.nupkg.sha512",

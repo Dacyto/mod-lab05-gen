@@ -3,217 +3,202 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Threading;
 using System.IO;
 
 namespace generator
 {
-    class Gen1
+    // Разработать генератор текста на основе пар букв (биграмм). Используются вероятностные свойства сочетаний пар символов
+    public class BigrammGenerator
     {
-        private string syms = "абвгдежзийклмнопрстуфхцчшщьыэюя";
+        private string syms = "абвгдежзийклмнопрстуфхцчшщыьэюя";
         private char[] data;
-        private int size;
-        private Random random = new Random();
-        public int[,] arr;
-        int[,] np;
-        int summa = 0;
-        public Gen1(int[,] ar)
+        string inputfile;
+        string outputfile;
+
+        public BigrammGenerator(string file1, string file2)
         {
-            arr = ar;
-            size = syms.Length;
+            inputfile = file1;
+            outputfile = file2;
+        }
+
+        public int[][] GetBG()
+        {
+            string[] s = File.ReadAllLines(inputfile);
+            int[][] array = new int[s.Length][];
+            for (int i = 0; i < array.Length; i++)
+            {
+                string[] str = s[i].Split('\t');
+                array[i] = new int[str.Length];
+                for (int j = 0; j < str.Length; j++)
+                {
+                    array[i][j] = int.Parse(str[j]);
+                }
+            }
+            return array;
+        }
+
+        public char GetSym(char ch)
+        {
+            int index = syms.IndexOf(ch);
+            int[][] chars = GetBG();
+            Random random = new Random();
+            int[] data = new int[31];
+            for (int j = 0; j < chars[index].Length; j++)
+            {
+                data[j] = chars[index][j];
+            }
+            int value_index = random.Next(0, data.Length - 1);
+            return syms[random.Next(0, data.Length - 1)];
+        }
+
+        public string GetCharsUsingBG()
+        {
+            Random random = new Random();
+            char[] symbols = new char[1000];
             data = syms.ToCharArray();
-            for (int i = 0; i < size; i++)
-                for (int j = 0; j < size; j++)
-                    summa += arr[i, j];
-            np = new int[size, size];
-            int s2 = 0;
-            for (int i = 0; i < size; i++)
+            char symbol = data[random.Next(0, data.Length)];
+            symbols[0] = symbol;
+            for (int i = 1; i < 1000; i++)
             {
-                for (int j = 0; j < size; j++)
-                {
-                    s2 += arr[i, j];
-                    np[i, j] = s2;
-                }
+                symbols[i] = GetSym(symbol);
+                symbol = symbols[i];
             }
-        }
-        public string getSym()
-        {
-            int m = random.Next(0, summa);
-            int j = 0;
-            int i = 0;
-            for (i = 0; i < size; i++)
-            {
-                int F = 0;
-                for (j = 0; j < size; j++)
-                {
-                    if (m < np[i, j])
-                    {
-                        F = 1;
-                        break;
-                    }
-                }
-                if (F == 1) break;
-            }
-            return data[i].ToString() + data[j].ToString();
+            string str = new string(symbols);
+            File.Create(outputfile).Close();
+            File.WriteAllText(outputfile, str);
+            return str;
         }
     }
-    class Gen2
+
+    // Разработать генератор текста на основе частотных свойств слов
+    public class FreqGenerator
     {
-        private string[] data;
-        private int size;
-        private Random random = new Random();
-        int[] np;
-        int summa = 0;
-        public Gen2(string[] arr)
+        string inputfile;
+        string outputfile;
+
+        public FreqGenerator(string file1, string file2)
         {
-            data = arr;
-            size = 100;
-            np = new int[size];
-            for (int i = 0; i < size; i++)
+            inputfile = file1;
+            outputfile = file2;
+        }
+
+        public (string[], int[]) GetFG()
+        {
+            string[] words = new string[100];
+            string[] s = File.ReadAllLines(inputfile);
+            int[] values = new int[100];
+            for (int i = 0; i < 100; i++)
             {
-                summa += i;
-                np[i] = summa;
+                words[i] = s[i].Split(" ")[0];
+                values[i] = int.Parse(s[i].Split(" ")[1]);
+            }
+            return (words, values);
+        }
+
+        public string GetWord(string word)
+        {
+            (string[] words, int[] vals) = GetFG();
+            int index = Array.IndexOf(words, word);
+            Random random = new Random();
+            int rand_ind = random.Next(95, 100);
+            if (index <= rand_ind)
+            {
+                return words[index];
+            }
+            else
+            {
+                return words[rand_ind];
             }
         }
-        public string getSym()
+
+        public string GetTextUsingFG()
         {
-            int m = random.Next(0, summa);
-            int i = 0;
-            for (i = 0; i < 100; i++) if (m < np[i]) break;
-            return data[i];
+            (string[] words, int[] vals) = GetFG();
+            Random random = new Random();
+            string[] all_words = new string[1000];
+            string word;
+            for (int i = 0; i < 1000; i++)
+            {
+                word = words[random.Next(0, words.Length)];
+                all_words[i] = GetWord(word);
+            }
+            string str = string.Join(' ', all_words);
+            File.Create(outputfile).Close();
+            File.WriteAllText(outputfile, str);
+            return str;
         }
     }
-    class Gen3
+
+    // Разработать генератор текста на основе частотных свойств пар слов
+    public class BiFreqGenerator
     {
-        private string[] data;
-        private int size;
-        private Random random = new Random();
-        int[] np;
-        int summa = 0;
-        public Gen3(string[] arr)
+        string inputfile;
+        string outputfile;
+
+        public BiFreqGenerator(string file1, string file2)
         {
-            data = arr;
-            size = 100;
-            np = new int[size];
-            for (int i = 0; i < size; i++)
+            inputfile = file1;
+            outputfile = file2;
+        }
+        public (string[], int[]) GetBFG()
+        {
+            string[] words = new string[100];
+            string[] s = File.ReadAllLines(inputfile);
+            int[] values = new int[100];
+            for (int i = 0; i < 100; i++)
             {
-                summa += i;
-                np[i] = summa;
+                words[i] = s[i].Split("  ")[0];
+                values[i] = int.Parse(s[i].Split("  ")[1]);
+            }
+            return (words, values);
+        }
+
+        public string GetWords(string word)
+        {
+            (string[] words, int[] vals) = GetBFG();
+            int index = Array.IndexOf(words, word);
+            Random random = new Random();
+            int rand_ind = random.Next(95, 100);
+            if (index <= rand_ind)
+            {
+                return words[index];
+            }
+            else
+            {
+                return words[rand_ind];
             }
         }
-        public string getSym()
+
+        public string GetTextUsingBFG()
         {
-            int m = random.Next(0, summa);
-            int i = 0;
-            for (i = 0; i < 100; i++) if (m < np[i]) break;
-            return data[i];
+            (string[] words, int[] vals) = GetBFG();
+            Random random = new Random();
+            string[] all_words = new string[1000];
+            string word;
+            for (int i = 0; i < 1000; i++)
+            {
+                word = words[random.Next(0, words.Length)];
+                all_words[i] = GetWords(word);
+            }
+            string str = string.Join(' ', all_words);
+            File.Create(outputfile).Close();
+            File.WriteAllText(outputfile, str);
+            return str;
         }
     }
+
     class Program
     {
         static void Main(string[] args)
         {
-            int[,] arr = new int[31, 31];
-            using (StreamReader r = new StreamReader("test1.txt"))
-            {
-                for (int i = 0; i < 16; i++)
-                {
-                    string test = r.ReadLine();
-                    string[] temp = test.Split(new Char[] { ' ' });
-                    int j = 0;
-                    foreach (string item in temp)
-                    {
-                        arr[i, j] = int.Parse(item);
-                        j++;
-                    }
-                }
-            }
-            using (StreamReader r = new StreamReader("test2.txt"))
-            {
-                for (int i = 0; i < 16; i++)
-                {
-                    string test = r.ReadLine();
-                    string[] temp = test.Split(new Char[] { ' ' });
-                    int j = 0;
-                    foreach (string item in temp)
-                    {
-                        arr[i, j + 16] = int.Parse(item);
-                        j++;
-                    }
-                }
-            }
-            using (StreamReader r = new StreamReader("test3.txt"))
-            {
-                for (int i = 0; i < 15; i++)
-                {
-                    string test = r.ReadLine();
-                    string[] temp = test.Split(new Char[] { ' ' });
-                    int j = 0;
-                    foreach (string item in temp)
-                    {
-                        arr[i + 16, j] = int.Parse(item);
-                        j++;
-                    }
-                }
-            }
-            using (StreamReader r = new StreamReader("test4.txt"))
-            {
-                for (int i = 0; i < 15; i++)
-                {
-                    string test = r.ReadLine();
-                    string[] temp = test.Split(new Char[] { ' ' });
-                    int j = 0;
-                    foreach (string item in temp)
-                    {
-                        arr[i + 16, j + 16] = int.Parse(item);
-                        j++;
-                    }
-                }
-            }
-            Gen1 gen = new Gen1(arr);
-            string[] arr_str = new string[100];
-            using (StreamReader r = new StreamReader("word.txt", Encoding.GetEncoding(1251)))
-            {
-                for (int i = 0; i < 100; i++)
-                    arr_str[i] = r.ReadLine();
-            }
-            Gen2 gen2 = new Gen2(arr_str);
-            using (StreamReader r = new StreamReader("double_words.txt", Encoding.GetEncoding(1251)))
-            {
-                for (int i = 0; i < 100; i++)
-                    arr_str[i] = r.ReadLine();
-            }
-            Gen3 gen3 = new Gen3(arr_str);
-            using (StreamWriter r = new StreamWriter("answer1.txt"))
-            {
-                for (int i = 0; i < 1000; i++)
-                {
-                    string str = gen.getSym();
-                    r.Write(str[0]);
-                    r.Write(str[1]);
-                }
-            }
-            using (StreamWriter r = new StreamWriter("answer2.txt"))
-            {
-                for (int i = 0; i < 1000; i++)
-                {
-                    string str = gen2.getSym();
-                    for (int j = 0; j < str.Length; j++)
-                        r.Write(str[j]);
-                    r.Write(' ');
-                }
-            }
-            using (StreamWriter r = new StreamWriter("answer3.txt"))
-            {
-                for (int i = 0; i < 1000; i++)
-                {
-                    string str = gen3.getSym();
-                    for (int j = 0; j < str.Length; j++)
-                        r.Write(str[j]);
-                    r.Write(' ');
-                }
-            }
-            Console.ReadKey();
+            BigrammGenerator bg = new BigrammGenerator("../../../../tables/BigrammGen.txt", "../../../../outputs/result1.txt");
+            bg.GetCharsUsingBG();
+
+            FreqGenerator fg = new FreqGenerator("../../../../tables/FreqGen.txt", "../../../../outputs/result2.txt");
+            fg.GetTextUsingFG();
+
+            BiFreqGenerator bfg = new BiFreqGenerator("../../../../tables/BiFreqGen.txt", "../../../../outputs/result3.txt");
+            bfg.GetTextUsingBFG();
         }
     }
 }

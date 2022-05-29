@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Владимир\\Source\\Repos\\mod-lab05-gen\\ProjCharGenerator\\ProjCharGenerator.csproj": {}
+    "C:\\Users\\Владимир\\source\\repos\\mod-lab05-gen\\ProjCharGenerator\\ProjCharGenerator.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Владимир\\Source\\Repos\\mod-lab05-gen\\ProjCharGenerator\\ProjCharGenerator.csproj": {
+    "C:\\Users\\Владимир\\source\\repos\\mod-lab05-gen\\ProjCharGenerator\\ProjCharGenerator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Владимир\\Source\\Repos\\mod-lab05-gen\\ProjCharGenerator\\ProjCharGenerator.csproj",
+        "projectUniqueName": "C:\\Users\\Владимир\\source\\repos\\mod-lab05-gen\\ProjCharGenerator\\ProjCharGenerator.csproj",
         "projectName": "ProjCharGenerator",
-        "projectPath": "C:\\Users\\Владимир\\Source\\Repos\\mod-lab05-gen\\ProjCharGenerator\\ProjCharGenerator.csproj",
+        "projectPath": "C:\\Users\\Владимир\\source\\repos\\mod-lab05-gen\\ProjCharGenerator\\ProjCharGenerator.csproj",
         "packagesPath": "C:\\Users\\Владимир\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Владимир\\Source\\Repos\\mod-lab05-gen\\ProjCharGenerator\\obj\\",
+        "outputPath": "C:\\Users\\Владимир\\source\\repos\\mod-lab05-gen\\ProjCharGenerator\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Владимир\\AppData\\Roaming\\NuGet\\NuGet.Config",

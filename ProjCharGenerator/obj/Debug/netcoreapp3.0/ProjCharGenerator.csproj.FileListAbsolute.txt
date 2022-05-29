@@ -11,3 +11,4 @@ C:\Users\Владимир\Source\Repos\mod-lab05-gen\ProjCharGenerator\obj\Debug
 C:\Users\Владимир\Source\Repos\mod-lab05-gen\ProjCharGenerator\obj\Debug\netcoreapp3.0\ProjCharGenerator.dll
 C:\Users\Владимир\Source\Repos\mod-lab05-gen\ProjCharGenerator\obj\Debug\netcoreapp3.0\ProjCharGenerator.pdb
 C:\Users\Владимир\Source\Repos\mod-lab05-gen\ProjCharGenerator\obj\Debug\netcoreapp3.0\ProjCharGenerator.genruntimeconfig.cache
+C:\Users\Владимир\source\repos\mod-lab05-gen\ProjCharGenerator\obj\Debug\netcoreapp3.0\ProjCharGenerator.csproj.AssemblyReference.cache
