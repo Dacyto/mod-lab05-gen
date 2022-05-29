@@ -41,7 +41,7 @@ namespace ProjCharGenerator.Tests
             int[][] arr = bg.GetBG();
             int max_index = 0;
             int max_value = 0;
-            string syms = "àáâãäåæçèéêëìíîïğñòóôõö÷øùûüışÿ";
+            string syms = "Ã Ã¡Ã¢Ã£Ã¤Ã¥Ã¦Ã§Ã¨Ã©ÃªÃ«Ã¬Ã­Ã®Ã¯Ã°Ã±Ã²Ã³Ã´ÃµÃ¶Ã·Ã¸Ã¹Ã»Ã¼Ã½Ã¾Ã¿";
             for (int j = 0; j < arr[0].Length; j++)
             {
                 if (arr[0][j] >= max_value)
@@ -50,7 +50,7 @@ namespace ProjCharGenerator.Tests
                     max_index = j;
                 }
             }
-            Assert.IsTrue(syms[max_index] == 'í');
+            Assert.IsTrue(syms[max_index] == 'Ã­');
         }
 
         [TestMethod]
@@ -74,6 +74,7 @@ namespace ProjCharGenerator.Tests
             Assert.IsTrue(amount1 > amount2);
         }
 
+        [TestMethod]
         public void TestMethod7()
         {
             BiFreqGenerator bfg = new BiFreqGenerator("../../../../tables/BiFreqGen.txt", "../../../../outputs/res3.txt");
