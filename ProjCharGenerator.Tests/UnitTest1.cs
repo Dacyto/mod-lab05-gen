@@ -73,5 +73,17 @@ namespace ProjCharGenerator.Tests
             int amount2 = new Regex(val2).Matches(str).Count;
             Assert.IsTrue(amount1 > amount2);
         }
+
+        public void TestMethod7()
+        {
+            BiFreqGenerator bfg = new BiFreqGenerator("../../../../tables/BiFreqGen.txt", "../../../../outputs/res3.txt");
+            (string[] words, int[] vals) = bfg.GetBFG();
+            string val1 = words[0];
+            string val2 = words[89];
+            string str = bfg.GetTextUsingBFG();
+            int amount1 = new Regex(val1).Matches(str).Count;
+            int amount2 = new Regex(val2).Matches(str).Count;
+            Assert.IsFalse(amount2 > amount1);
+        }
     }
 }
