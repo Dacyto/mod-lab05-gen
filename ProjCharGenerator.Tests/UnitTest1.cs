@@ -11,7 +11,7 @@ namespace ProjCharGenerator.Tests
         [TestMethod]
         public void TestMethod1()
         {
-            BigrammGenerator bg = new BigrammGenerator("tables/BG.txt", "res1.txt");
+            BigrammGenerator bg = new BigrammGenerator("../../../../tables/BigrammGen.txt", "../../../../outputs/res1.txt");
             string str = bg.GetCharsUsingBG();
             Assert.IsTrue(str.Length == 1000);
         }
@@ -19,7 +19,7 @@ namespace ProjCharGenerator.Tests
         [TestMethod]
         public void TestMethod2()
         {
-            FreqGenerator fg = new FreqGenerator("tables/FG.txt", "res2.txt");
+            FreqGenerator fg = new FreqGenerator("../../../../tables/FreqGen.txt", "../../../../outputs/res2.txt");
             string str = fg.GetTextUsingFG();
             string[] arr = str.Split(' ');
             Assert.IsTrue(arr.Length == 1000);
@@ -28,7 +28,7 @@ namespace ProjCharGenerator.Tests
         [TestMethod]
         public void TestMethod3()
         {
-            BiFreqGenerator bfg = new BiFreqGenerator("tables/BFG.txt", "res3.txt");
+            BiFreqGenerator bfg = new BiFreqGenerator("../../../../tables/BiFreqGen.txt", "../../../../outputs/res3.txt");
             string str = bfg.GetTextUsingBFG();
             string[] arr = str.Split(' ');
             Assert.IsTrue(arr.Length == 2000);
@@ -37,7 +37,7 @@ namespace ProjCharGenerator.Tests
         [TestMethod]
         public void TestMethod4()
         {
-            BigrammGenerator bg = new BigrammGenerator("tables/BG.txt", "res1.txt");
+            BigrammGenerator bg = new BigrammGenerator("../../../../tables/BigrammGen.txt", "../../../../outputs/res1.txt");
             int[][] arr = bg.GetBG();
             int max_index = 0;
             int max_value = 0;
@@ -56,7 +56,7 @@ namespace ProjCharGenerator.Tests
         [TestMethod]
         public void TestMethod5()
         {
-            FreqGenerator fg = new FreqGenerator("tables/FG.txt", "res2.txt");
+            FreqGenerator fg = new FreqGenerator("../../../../tables/FreqGen.txt", "../../../../outputs/res2.txt");
             (string[] words, int[] vals) = fg.GetFG();
             Assert.IsTrue(words.Length + vals.Length == 200);
         }
@@ -64,7 +64,7 @@ namespace ProjCharGenerator.Tests
         [TestMethod]
         public void TestMethod6()
         {
-            BiFreqGenerator bfg = new BiFreqGenerator("tables/BFG.txt", "res3.txt");
+            BiFreqGenerator bfg = new BiFreqGenerator("../../../../tables/BiFreqGen.txt", "../../../../outputs/res3.txt");
             (string[] words, int[] vals) = bfg.GetBFG();
             string val1 = words[0];
             string val2 = words[99];
